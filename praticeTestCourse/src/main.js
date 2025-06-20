@@ -69,7 +69,19 @@ function fazerLogin() {
   const senha = document.getElementById("senha").value;
   const erro = document.getElementById("erroLogin");
 
+  if (login == "" || senha == "") {
+    erro.textContent = "";
+    document.getElementById("loginForm").classList.add("hidden");
+    document.getElementById("sistema").classList.remove("hidden");
+    document.getElementById("usuarioNome").textContent = login || "Convidado";
+    buscarLivros();
+    renderizarFavoritos();
+    renderizarHistorico();
+    return;
+  }
+
   if (login === usuarioValido.login && senha === usuarioValido.senha) {
+    erro.textContent = "";
     document.getElementById("loginForm").classList.add("hidden");
     document.getElementById("sistema").classList.remove("hidden");
     document.getElementById("usuarioNome").textContent = login;
@@ -131,11 +143,11 @@ function confirmarReserva() {
   const devolucao = document.getElementById("dataDevolucao").value;
   const avaliacao = prompt("Avalie o livro de 1 a 5:");
 
-  if (!retirada || !devolucao || !avaliacao) {
-    alert("Preencha todas as datas e avalie o livro.");
+  if (!avaliacao) {
+    alert("Avaliação obrigatória.");
     return;
   }
-
+  
   livrosReservados.push(livroSelecionado);
   historico.push({ titulo: livroSelecionado, retirada, devolucao, avaliacao, devolvido: false });
   renderizarHistorico();
@@ -151,12 +163,12 @@ function confirmarReserva() {
   sugerirLivro();
 }
 
+
 window.adicionarFavorito = function(titulo) {
-  if (!favoritos.includes(titulo)) {
-    favoritos.push(titulo);
-    renderizarFavoritos();
-  }
+  favoritos.push(titulo);
+  renderizarFavoritos();
 };
+
 
 window.removerFavorito = function(titulo) {
   favoritos = favoritos.filter(f => f !== titulo);
@@ -194,10 +206,8 @@ function renderizarHistorico() {
 }
 
 window.devolverLivro = function(titulo) {
-  // Remove o livro da lista de livros reservados
   livrosReservados = livrosReservados.filter(l => l !== titulo);
 
-  // Marca como devolvido no histórico (atualiza a última reserva ativa)
   for(let i = historico.length - 1; i >= 0; i--) {
     if(historico[i].titulo === titulo && !historico[i].devolvido) {
       historico[i].devolvido = true;
