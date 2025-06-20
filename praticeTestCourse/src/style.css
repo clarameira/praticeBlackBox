@@ -74,21 +74,16 @@ input, select {
   transition: border-color 0.3s;
 }
 
-input:focus, select:focus {
-  outline: none;
-  border-color: var(--azul);
+input:focus {
+  border-color: #ff00ff;
+  background-color: #ffccff;
+  box-shadow: 0 0 10px #ff00ff;
 }
 
 button {
-  background-color: var(--azul);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin-top: 20px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
+  background-color: #ffff00; 
+  color: #ff00ff;            
+  border: 2px dashed #00ff00; 
 }
 
 button:hover {
@@ -131,12 +126,12 @@ button:hover {
 }
 
 body.dark {
-  background-color: #1e1e1e;
-  color: #eee;
+  background-color: #220033;
+  color: #00ccff;
 }
 
 body.dark .container {
-  background: #2c2c2c;
+  background-color: #330055;
 }
 
 body.dark input,

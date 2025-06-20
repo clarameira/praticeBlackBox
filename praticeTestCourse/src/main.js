@@ -73,7 +73,7 @@ function fazerLogin() {
     erro.textContent = "";
     document.getElementById("loginForm").classList.add("hidden");
     document.getElementById("sistema").classList.remove("hidden");
-    document.getElementById("usuarioNome").textContent = login || "Convidado";
+    document.getElementById("usuarioNome").textContent = login || "Testador";
     buscarLivros();
     renderizarFavoritos();
     renderizarHistorico();
@@ -144,19 +144,15 @@ function confirmarReserva() {
   const avaliacao = prompt("Avalie o livro de 1 a 5:");
 
   if (!avaliacao) {
-    alert("Avaliação obrigatória.");
+    alert("Avalie");
     return;
   }
-  
-  livrosReservados.push(livroSelecionado);
-  historico.push({ titulo: livroSelecionado, retirada, devolucao, avaliacao, devolvido: false });
-  renderizarHistorico();
 
-  document.getElementById("mensagemReserva").innerHTML =
-    `Reserva confirmada para <strong>${livroSelecionado}</strong>!<br>
-     Retirada: <strong>${retirada}</strong><br>
-     Devolução: <strong>${devolucao}</strong><br>
-     Avaliação: <strong>${avaliacao}</strong>`;
+  document.getElementById("mensagemReserva").innerHTML +=
+  `<br>Reserva confirmada para <strong>${livroSelecionado}</strong>!<br>
+   Retirada: <strong>${retirada}</strong><br>
+   Devolução: <strong>${devolucao}</strong><br>
+   Avaliação: <strong>${avaliacao}</strong><br><br>`;
 
   document.getElementById("formReserva").classList.add("hidden");
   buscarLivros();
